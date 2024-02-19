@@ -1,0 +1,42 @@
+{
+    "name": "vscode-filename-cleaner",
+    "displayName": "VS Code File Name Cleaner",
+    "description": "Extension to clean file names in Visual Studio Code",
+    "version": "0.0.1",
+    "engines": {
+      "vscode": "^1.61.0"
+    },
+    "categories": [
+      "Other"
+    ],
+    "activationEvents": [
+      "onCommand:extension.cleanFileNames"
+    ],
+    "main": "extension.js",
+    "contributes": {
+      "commands": [
+        {
+          "command": "extension.cleanFileNames",
+          "title": "Clean File Names"
+        }
+      ],
+      "menus": {
+        "explorer/context": [
+          {
+            "command": "extension.cleanFileNames",
+            "group": "navigation"
+          }
+        ]
+      }
+    },
+    "publisher": "ThomasTSWD",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ThomasTSWD/code-filename-cleaner.git"
+    },
+    "icon": "icon.png",
+    "devDependencies": {
+      "@types/vscode": "^1.61.0"
+    }
+  }
+  

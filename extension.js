@@ -59,7 +59,6 @@ async function cleanFileNames(folderPath) {
 	}
 }
 function cleanFileNameString(fileName) {
-	// Extraire l'extension du nom de fichier
 	const extension = path.extname(fileName);
 	const baseName = path.basename(fileName, extension);
 
@@ -71,8 +70,8 @@ function cleanFileNameString(fileName) {
 	const withoutSpaces = normalizedBaseName.replace(/\s+/g, "-");
 	// Supprime les tirets multiples
 	const singleHyphens = withoutSpaces.replace(/-+/g, "-");
-	// Supprime les tirets à la fin du nom de fichier
-	const finalFileName = singleHyphens.replace(/-$/, "");
+	// Supprime les tirets à la fin du nom de fichier et le +
+	const finalFileName = singleHyphens.replace(/-$/, "").replace(/\+/g, "-");
 	// Reconstruire le nom de fichier en ajoutant l'extension à la fin
 	const cleanedFileName = finalFileName + extension;
 	return cleanedFileName;

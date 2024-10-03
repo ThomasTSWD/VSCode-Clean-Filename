@@ -6,7 +6,103 @@ function activate(context) {
 	let disposable = vscode.commands.registerCommand(
 		"extension.cleanFileNames",
 		async (uri) => {
+			if (!uri) {const vscode = require("vscode");
+const fs = require("fs");
+const path = require("path");
+
+function activate(context) {
+	let disposable = vscode.commands.registerCommand(
+		"extension.cleanFileNames",
+		async (uri) => {
 			if (!uri) {
+				vscode.window.showErrorMessage(
+					"Aucun fichier ou dossier sélectionné pour nettoyer les noms de fichiers."
+				);
+				return;
+			}
+
+			const selectedPath = uri.fsPath;
+
+			try {
+				const stat = await fs.promises.stat(selectedPath);
+				if (stat.isFile()) {
+					await cleanFileName(selectedPath);
+				} else if (stat.isDirectory()) {
+					await cleanFileNamesRecursive(selectedPath);
+				}
+				vscode.window.showInformationMessage(
+					"Les noms de fichiers ont été nettoyés avec succès."
+				);
+			} catch (error) {
+				vscode.window.showErrorMessage(
+					`Une erreur s'est produite : ${error.message}`
+				);
+			}
+		}
+	);
+
+	context.subscriptions.push(disposable);
+}
+
+// Fonction pour nettoyer le nom d'un fichier
+async function cleanFileName(filePath) {
+	const fileName = path.basename(filePath);
+	const cleanFileName = cleanFileNameString(fileName);
+	const newFilePath = path.join(path.dirname(filePath), cleanFileName);
+
+	if (filePath !== newFilePath) {
+		await fs.promises.rename(filePath, newFilePath);
+	}
+}
+
+// Fonction récursive pour nettoyer les fichiers dans les sous-dossiers
+async function cleanFileNamesRecursive(folderPath) {
+	const files = await fs.promises.readdir(folderPath);
+	for (const file of files) {
+		const filePath = path.join(folderPath, file);
+		const stat = await fs.promises.stat(filePath);
+
+		if (stat.isFile()) {
+			await cleanFileName(filePath);
+		} else if (stat.isDirectory()) {
+			// Appel récursif pour les sous-dossiers
+			await cleanFileNamesRecursive(filePath);
+		}
+	}
+}
+
+// Fonction pour nettoyer un nom de fichier en remplaçant les caractères indésirables
+function cleanFileNameString(fileName) {
+	const extension = path.extname(fileName);
+	const baseName = path.basename(fileName, extension);
+
+	const normalizedBaseName = baseName
+		.normalize("NFD") // Normalisation pour enlever les accents
+		.replace(/[\u0300-\u036f]/g, "") // Supprime les accents
+		.replace(/[^\w\s'-.]/g, "-") // Remplace tout caractère non-alphanumérique (hors tiret, point, etc.) par un tiret
+		.replace(/,/g, "-"); // Remplace les virgules par des tirets
+
+	// Remplace les espaces par des tirets
+	const withoutSpaces = normalizedBaseName.replace(/\s+/g, "-");
+	// Supprime les tirets multiples
+	const singleHyphens = withoutSpaces.replace(/-+/g, "-");
+	// Supprime les tirets à la fin du nom de fichier
+	const finalFileName = singleHyphens.replace(/-$/, "").replace(/\+/g, "-");
+
+	// Reconstruire le nom de fichier avec l'extension
+	const cleanedFileName = finalFileName + extension;
+	return cleanedFileName;
+}
+
+function deactivate() {
+	// Nettoyage des ressources si nécessaire
+}
+
+module.exports = {
+	activate,
+	deactivate,
+};
+
 				vscode.window.showErrorMessage(
 					"Aucun fichier ou dossier sélectionné pour nettoyer les noms de fichiers."
 				);

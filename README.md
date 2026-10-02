@@ -1,29 +1,35 @@
-# Nettoyeur de noms de fichiers pour VS Code
+# Clean Filename
 
-## Introduction
+[![Release](https://img.shields.io/github/v/release/ThomasTSWD/VsCode-clean-filename)](https://github.com/ThomasTSWD/VsCode-clean-filename/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Nettoyeur de noms de fichiers pour VS Code** est une extension pour Visual Studio Code qui vous permet de nettoyer rapidement les noms de fichiers en utilisant diverses options directement depuis l'éditeur de code.
+Clean file names from the VS Code Explorer: no more accents, spaces or special characters.
 
-## Fonctionnalités
+## Features
 
--   Nettoyez facilement les noms de fichiers en une fois ou en lot.
--   Prend en charge diverses options de nettoyage telles que la suppression d'espaces, la normalisation des caractères, etc.
--   Utilisez-le directement depuis l'explorateur de fichiers ou via des commandes enregistrées.
+- Cleans one file, several selected items, or a whole folder recursively
+- `Café Crème (1).PDF` becomes `Cafe-Creme-1.pdf`
+- Never overwrites an existing file, skips hidden files, hidden folders and `node_modules`
+- Asks for confirmation before renaming several files
+- No configuration required
 
-## Utilisation
+## Installation
 
-### Nettoyer un seul fichier
+1. Download the latest `.vsix` from the [Releases](https://github.com/ThomasTSWD/VsCode-clean-filename/releases/latest) page
+2. In VS Code, run **Extensions: Install from VSIX...** and select the file
 
-1. Sélectionnez le fichier à nettoyer dans l'explorateur de fichiers.
-2. Faites un clic droit sur le fichier.
-3. Choisissez l'option "Nettoyer le nom du fichier" dans le menu contextuel.
-4. Suivez les instructions pour spécifier les options de nettoyage.
-5. Appuyez sur Entrée pour confirmer.
+## Usage
 
-### Nettoyer plusieurs fichiers à la fois
+Right-click a file or folder in the Explorer and choose **Clean File Names**. The command is also available in the Command Palette for the active file.
 
-1. Sélectionnez plusieurs fichiers à nettoyer dans l'explorateur de fichiers.
-2. Faites un clic droit sur les fichiers sélectionnés.
-3. Choisissez l'option "Nettoyer les noms des fichiers" dans le menu contextuel.
-4. Suivez les instructions pour spécifier les options de nettoyage.
-5. Appuyez sur Entrée pour confirmer.
+## Requirements
+
+Local files only. Virtual workspaces are not supported.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
+## License
+
+[MIT](LICENSE)

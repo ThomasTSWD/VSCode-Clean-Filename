@@ -1,42 +1,79 @@
 {
-    "name": "vscode-filename-cleaner",
-    "displayName": "VS Code File Name Cleaner",
-    "description": "Extension to clean file names in Visual Studio Code",
-    "version": "0.0.1",
-    "engines": {
-      "vscode": "^1.61.0"
+  "name": "clean-filename",
+  "displayName": "Clean Filename",
+  "description": "Clean file names from the Explorer: remove accents, spaces and special characters.",
+  "version": "1.2.0",
+  "author": "ThomasTSWD",
+  "publisher": "ThomasTSWD",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThomasTSWD/VsCode-clean-filename"
+  },
+  "bugs": {
+    "url": "https://github.com/ThomasTSWD/VsCode-clean-filename/issues"
+  },
+  "homepage": "https://github.com/ThomasTSWD/VsCode-clean-filename#readme",
+  "icon": "images/icon.png",
+  "keywords": [
+    "filename",
+    "rename",
+    "clean",
+    "slug",
+    "accents"
+  ],
+  "engines": {
+    "vscode": "^1.120.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
     },
-    "categories": [
-      "Other"
+    "virtualWorkspaces": false
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "clean-filename.clean",
+        "title": "Clean File Names",
+        "category": "Clean Filename"
+      }
     ],
-    "activationEvents": [
-      "onCommand:extension.cleanFileNames"
-    ],
-    "main": "extension.js",
-    "contributes": {
-      "commands": [
+    "menus": {
+      "explorer/context": [
         {
-          "command": "extension.cleanFileNames",
-          "title": "Clean File Names"
+          "command": "clean-filename.clean",
+          "when": "resourceScheme == file",
+          "group": "7_modification"
         }
       ],
-      "menus": {
-        "explorer/context": [
-          {
-            "command": "extension.cleanFileNames",
-            "group": "navigation"
-          }
-        ]
-      }
-    },
-    "publisher": "ThomasTSWD",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ThomasTSWD/code-filename-cleaner.git"
-    },
-    "icon": "icon.png",
-    "devDependencies": {
-      "@types/vscode": "^1.61.0"
+      "commandPalette": [
+        {
+          "command": "clean-filename.clean",
+          "when": "resourceScheme == file"
+        }
+      ]
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src",
+    "test": "npm run compile && node --test \"out/**/*.test.js\"",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "22.x",
+    "@types/vscode": "^1.120.0",
+    "@vscode/vsce": "^4.0.0",
+    "eslint": "^9.39.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
   }
-  
+}

@@ -1,6 +1,6 @@
 # VSCode Clean Filename
 
-[![Release](https://img.shields.io/github/v/release/ThomasTSWD/VSCode-Clean-Filename)](https://github.com/ThomasTSWD/VSCode-Clean-Filename/releases/latest)
+[![Release](https://img.shields.io/github/v/release/thomas-serment/VSCode-Clean-Filename)](https://github.com/thomas-serment/VSCode-Clean-Filename/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Clean file names from the VS Code Explorer: no more accents, spaces or special characters.
@@ -15,7 +15,7 @@ Clean file names from the VS Code Explorer: no more accents, spaces or special c
 
 ## Installation
 
-1. Download the latest `.vsix` from the [Releases](https://github.com/ThomasTSWD/VSCode-Clean-Filename/releases/latest) page
+1. Download the latest `.vsix` from the [Releases](https://github.com/thomas-serment/VSCode-Clean-Filename/releases/latest) page
 2. In VS Code, run **Extensions: Install from VSIX...** and select the file
 
 ## Usage
